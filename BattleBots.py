@@ -4,40 +4,35 @@
 import sys
 import pygame
 from pygame.locals import *
+from MenuScreen import MenuScreen
+from GameScreen import GameScreen
 
 class BattleBots:
-    color_black = (0, 0, 0)
-
     def __init__(self):
         self.fps_target = 30
         pygame.init()
+        pygame.display.set_caption('Battle Bots')
         self.fps_clock = pygame.time.Clock()
         self.display_surface = pygame.display.set_mode((1024, 768))
-        pygame.display.set_caption('Battle Bots')
-        self.img_tank = pygame.image.load('resources/tank.bmp')
-        self.player1_x = 0
-        self.player1_y = 0
+	self.screen_menu = MenuScreen(self.callback)
+	self.screen_game = GameScreen(self.callback)
+	self.screen_current = self.screen_menu
 
     def loop(self):
         while True:
-            self.display_surface.fill(self.color_black)
-            self.display_surface.blit(self.img_tank, (self.player1_x, self.player1_y))
+            self.screen_current.draw(self.display_surface)
             for event in pygame.event.get():
-                if event.type == QUIT:
-                    self.quit()
-                elif event.type == KEYUP:
-                    if event.key == K_ESCAPE:
-                        self.quit()
-                    elif event.key == K_UP:
-                        self.player1_y -= 5
-                    elif event.key == K_DOWN:
-                        self.player1_y += 5
-                    elif event.key == K_LEFT:
-                        self.player1_x -= 5
-                    elif event.key == K_RIGHT:
-                        self.player1_x += 5
+                self.screen_current.event(event)
             pygame.display.update()
             self.fps_clock.tick(self.fps_target)
+
+    def callback(self, code, opt):
+	if code == MenuScreen.ACTION_QUIT:
+            self.quit()
+        elif code == MenuScreen.ACTION_STARTGAME:
+            self.screen_current = self.screen_game
+        elif code == GameScreen.ACTION_QUIT:
+            self.screen_current = self.screen_menu
 
     def quit(self):
         pygame.quit()
