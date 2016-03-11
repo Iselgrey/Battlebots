@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import bots
+import pkgutil
+import importlib
 from abc import ABCMeta, abstractmethod
 
 class AbstractBot():
@@ -16,8 +19,9 @@ class AbstractBot():
 
     @staticmethod
     def list_bots():
-        # TODO: Implement...
-        return None
+        for (module_loader, name, ispkg) in pkgutil.iter_modules(['bots/']):
+            importlib.import_module('.' + name, __package__)
+        return {cls.__name__: cls for cls in bots.AbstractBot.AbstractBot.__subclasses__()}
 
     @abstractmethod
     def update(self):

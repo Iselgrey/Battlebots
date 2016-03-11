@@ -46,10 +46,3 @@ class BattleBots:
 if __name__ == "__main__":
     b = BattleBots()
     b.loop()
-
-
-
-
-
-
-
