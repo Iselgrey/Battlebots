@@ -9,8 +9,8 @@ class GameScreen(AbstractScreen):
     ACTION_QUIT = "game_quit"
     color_black = (0, 0, 0)
 
-    def __init__(self, callback_fcn):
-        super(GameScreen, self).__init__(callback_fcn)
+    def __init__(self, callback_fcn, resolution):
+        super(GameScreen, self).__init__(callback_fcn, resolution)
 	#self.img_tank = pygame.image.load('resources/tank.bmp')
         self.player1_x = 0
         self.player1_y = 0

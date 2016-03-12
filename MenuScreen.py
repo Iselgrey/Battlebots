@@ -11,14 +11,17 @@ class MenuScreen(AbstractScreen):
     COLOR_BLACK = (  0,   0,   0)
     COLOR_WHITE = (255, 255, 255)
 
-    def __init__(self, callback_fcn):
-        super(MenuScreen, self).__init__(callback_fcn)
-        self.font = pygame.font.SysFont("monospace", 15)
-        self.label_top = self.font.render("Main menu", 1, self.COLOR_WHITE)
+    def __init__(self, callback_fcn, resolution):
+        super(MenuScreen, self).__init__(callback_fcn, resolution)
+        self.font = pygame.font.SysFont("monospace bold", 42)
+        self.label_top = self.font.render("MAIN MENU", 1, self.COLOR_WHITE)
 
     def draw(self, surface):
+        rect = surface.get_rect()
         surface.fill(self.COLOR_BLACK)
-        surface.blit(self.label_top, (100, 100))
+        label_top_rect = self.label_top.get_rect()
+        label_top_rect.center = rect.centerx, rect.height/4
+        surface.blit(self.label_top, label_top_rect)
 
     def event(self, event):
         if event.type == QUIT:

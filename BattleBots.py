@@ -8,14 +8,16 @@ from MenuScreen import MenuScreen
 from GameScreen import GameScreen
 
 class BattleBots:
+    FPS_TARGET = 30
+    RESOLUTION = (1024, 768)
+
     def __init__(self):
-        self.fps_target = 30
         pygame.init()
         pygame.display.set_caption('Battle Bots')
         self.fps_clock = pygame.time.Clock()
-        self.display_surface = pygame.display.set_mode((1024, 768))
-	self.screen_menu = MenuScreen(self.callback)
-	self.screen_game = GameScreen(self.callback)
+        self.display_surface = pygame.display.set_mode(self.RESOLUTION)
+	self.screen_menu = MenuScreen(self.callback, self.RESOLUTION)
+	self.screen_game = GameScreen(self.callback, self.RESOLUTION)
 	self.screen_current = self.screen_menu
 
     def loop(self):
@@ -24,7 +26,7 @@ class BattleBots:
             for event in pygame.event.get():
                 self.screen_current.event(event)
             pygame.display.update()
-            self.fps_clock.tick(self.fps_target)
+            self.fps_clock.tick(self.FPS_TARGET)
 
     def callback(self, code, opt):
 	if code == MenuScreen.ACTION_QUIT:
