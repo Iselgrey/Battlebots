@@ -16,9 +16,9 @@ class BattleBots:
         pygame.display.set_caption('Battle Bots')
         self.fps_clock = pygame.time.Clock()
         self.display_surface = pygame.display.set_mode(self.RESOLUTION)
-	self.screen_menu = MenuScreen(self.callback, self.RESOLUTION)
-	self.screen_game = GameScreen(self.callback, self.RESOLUTION)
-	self.screen_current = self.screen_menu
+        self.screen_menu = MenuScreen(self.callback, self.RESOLUTION)
+        self.screen_game = GameScreen(self.callback, self.RESOLUTION)
+        self.screen_current = self.screen_menu
 
     def loop(self):
         while True:
@@ -29,7 +29,7 @@ class BattleBots:
             self.fps_clock.tick(self.FPS_TARGET)
 
     def callback(self, code, opt):
-	if code == MenuScreen.ACTION_QUIT:
+        if code == MenuScreen.ACTION_QUIT:
             self.quit()
         elif code == MenuScreen.ACTION_STARTGAME:
             self.screen_current = self.screen_game
