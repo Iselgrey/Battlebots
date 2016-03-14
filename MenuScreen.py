@@ -15,6 +15,7 @@ class MenuScreen(AbstractScreen):
         super(MenuScreen, self).__init__(callback_fcn, resolution)
         self.font = pygame.font.SysFont("monospace bold", 42)
         self.label_top = self.font.render("MAIN MENU", 1, self.COLOR_WHITE)
+        self.label_start = self.font.render("PRESS <SPACE> TO START GAME...", 1, self.COLOR_WHITE)
 
     def draw(self, surface):
         rect = surface.get_rect()
@@ -22,6 +23,9 @@ class MenuScreen(AbstractScreen):
         label_top_rect = self.label_top.get_rect()
         label_top_rect.center = rect.centerx, rect.height/4
         surface.blit(self.label_top, label_top_rect)
+        label_start_rect = self.label_start.get_rect()
+        label_start_rect.center = rect.centerx, rect.height*3/4
+        surface.blit(self.label_start, label_start_rect)
 
     def event(self, event):
         if event.type == QUIT:
