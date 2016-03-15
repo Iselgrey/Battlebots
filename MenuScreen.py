@@ -16,10 +16,10 @@ class MenuScreen(AbstractScreen):
 
     def __init__(self, callback_fcn, resolution):
         super(MenuScreen, self).__init__(callback_fcn, resolution)
-	self.bot_list = AbstractBot.list_bots()
+        self.bot_list = AbstractBot.list_bots()
         self.bot_p1 = 0
         self.bot_p2 = 0
-	self.bot_select = 0
+        self.bot_select = 0
         self.font = pygame.font.Font("resources/fonts/thirteen_pixel_fonts.ttf", 32)
         self.label_top = self.font.render("MAIN MENU", 1, self.COLOR_WHITE)
         self.label_start = self.font.render("PRESS <SPACE> TO START GAME...", 1, self.COLOR_WHITE)
@@ -49,32 +49,32 @@ class MenuScreen(AbstractScreen):
             if event.key == K_ESCAPE:
                 self.action(self.ACTION_QUIT, None)
             elif event.key == K_SPACE:
-		self.action(self.ACTION_SETP1, self.bot_list[self.bot_list.keys()[self.bot_p1]])
-		self.action(self.ACTION_SETP2, self.bot_list[self.bot_list.keys()[self.bot_p2]])
+                self.action(self.ACTION_SETP1, self.bot_list[self.bot_list.keys()[self.bot_p1]])
+                self.action(self.ACTION_SETP2, self.bot_list[self.bot_list.keys()[self.bot_p2]])
                 self.action(self.ACTION_STARTGAME, None)
             elif event.key == K_UP:
                 self.bot_select = self.bot_select - 1
                 if self.bot_select < 0:
-			self.bot_select = 0
+                    self.bot_select = 0
             elif event.key == K_DOWN:
                 self.bot_select = self.bot_select + 1
                 if self.bot_select > 1:
-			self.bot_select = 1
+                    self.bot_select = 1
             elif event.key == K_LEFT:
-		if self.bot_select == 0:
-			self.bot_p1 = self.bot_p1 - 1
-			if self.bot_p1 < 0:
-				self.bot_p1 = 0
-		elif self.bot_select == 1:
-			self.bot_p2 = self.bot_p2 - 1
-			if self.bot_p2 < 0:
-				self.bot_p2 = 0
+                if self.bot_select == 0:
+                    self.bot_p1 = self.bot_p1 - 1
+                    if self.bot_p1 < 0:
+                        self.bot_p1 = 0
+                elif self.bot_select == 1:
+                    self.bot_p2 = self.bot_p2 - 1
+                    if self.bot_p2 < 0:
+                        self.bot_p2 = 0
             elif event.key == K_RIGHT:
-		if self.bot_select == 0:
-			self.bot_p1 = self.bot_p1 + 1
-			if self.bot_p1 >= len(self.bot_list)-1:
-				self.bot_p1 = len(self.bot_list)-1
-		elif self.bot_select == 1:
-			self.bot_p2 = self.bot_p2 - 1
-			if self.bot_p2 >= len(self.bot_list):
-				self.bot_p2 = len(self.bot_list)-1
+                if self.bot_select == 0:
+                    self.bot_p1 = self.bot_p1 + 1
+                    if self.bot_p1 >= len(self.bot_list)-1:
+                        self.bot_p1 = len(self.bot_list)-1
+                elif self.bot_select == 1:
+                    self.bot_p2 = self.bot_p2 + 1
+                    if self.bot_p2 >= len(self.bot_list)-1:
+                        self.bot_p2 = len(self.bot_list)-1
