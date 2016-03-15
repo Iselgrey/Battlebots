@@ -33,8 +33,16 @@ class BattleBots:
             self.quit()
         elif code == MenuScreen.ACTION_STARTGAME:
             self.screen_current = self.screen_game
+            self.screen_game.restart()
+        elif code == MenuScreen.ACTION_SETP1:
+            self.screen_game.set_p1(opt)
+        elif code == MenuScreen.ACTION_SETP2:
+            self.screen_game.set_p2(opt)
         elif code == GameScreen.ACTION_QUIT:
             self.screen_current = self.screen_menu
+        else:
+            print("[!] Unrecognized action...")
+            self.quit()
 
     def quit(self):
         pygame.quit()

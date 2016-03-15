@@ -9,6 +9,8 @@ from bots.AbstractBot import AbstractBot
 class MenuScreen(AbstractScreen):
     ACTION_QUIT = "menu_quit"
     ACTION_STARTGAME = "menu_startg"
+    ACTION_SETP1 = "set_p1"
+    ACTION_SETP2 = "set_p2"
     COLOR_BLACK = (  0,   0,   0)
     COLOR_WHITE = (255, 255, 255)
 
@@ -47,6 +49,8 @@ class MenuScreen(AbstractScreen):
             if event.key == K_ESCAPE:
                 self.action(self.ACTION_QUIT, None)
             elif event.key == K_SPACE:
+		self.action(self.ACTION_SETP1, self.bot_list[self.bot_list.keys()[self.bot_p1]])
+		self.action(self.ACTION_SETP2, self.bot_list[self.bot_list.keys()[self.bot_p2]])
                 self.action(self.ACTION_STARTGAME, None)
             elif event.key == K_UP:
                 self.bot_select = self.bot_select - 1

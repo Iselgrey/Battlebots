@@ -24,5 +24,9 @@ class AbstractBot():
         return {cls.__name__: cls for cls in bots.AbstractBot.AbstractBot.__subclasses__()}
 
     @abstractmethod
-    def update(self):
+    def update(self, px, py):
+        pass
+
+    @abstractmethod
+    def event(self, event):
         pass

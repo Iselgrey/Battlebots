@@ -11,13 +11,39 @@ class GameScreen(AbstractScreen):
 
     def __init__(self, callback_fcn, resolution):
         super(GameScreen, self).__init__(callback_fcn, resolution)
-	#self.img_tank = pygame.image.load('resources/tank.bmp')
+	self.img_tank = pygame.image.load('resources/images/tank.png')
+        self.img_tank_180 = pygame.transform.rotate(self.img_tank, 180)
         self.player1_x = 0
         self.player1_y = 0
+        self.player2_x = 0
+        self.player2_y = 0
+        self.restart()
+        self.player1_bot = None
+        self.player2_bot = None
+
+    def set_p1(self, bot):
+        self.player1_bot = bot()
+
+    def set_p2(self, bot):
+        self.player2_bot = bot()
+
+    def restart(self):
+        self.reset = True
 
     def draw(self, surface):
         surface.fill(self.color_black)
-        #surface.blit(self.img_tank, (self.player1_x, self.player1_y))
+	if self.reset:
+            rect = surface.get_rect()
+            self.player1_x = rect.centerx-50
+            self.player1_y = 0
+            self.player2_x = rect.centerx-50
+            self.player2_y = rect.height-100
+            self.reset = False
+        if self.player1_bot != None and self.player2_bot != None:
+            self.player1_x, self.player1_y = self.player1_bot.update(self.player1_x, self.player1_y)
+            self.player2_x, self.player2_y = self.player2_bot.update(self.player2_x, self.player2_y)
+            surface.blit(self.img_tank_180, (self.player1_x, self.player1_y))
+            surface.blit(self.img_tank, (self.player2_x, self.player2_y))
 
     def event(self, event):
         if event.type == QUIT:
@@ -25,11 +51,6 @@ class GameScreen(AbstractScreen):
         elif event.type == KEYUP:
             if event.key == K_ESCAPE:
                 self.action(self.ACTION_QUIT, None)
-            elif event.key == K_UP:
-                self.player1_y -= 5
-            elif event.key == K_DOWN:
-                self.player1_y += 5
-            elif event.key == K_LEFT:
-                self.player1_x -= 5
-            elif event.key == K_RIGHT:
-                self.player1_x += 5
+        elif event.type == KEYDOWN and event.key != K_ESCAPE and self.player1_bot != None and self.player2_bot != None:
+            self.player1_bot.event(event)
+            self.player2_bot.event(event)
