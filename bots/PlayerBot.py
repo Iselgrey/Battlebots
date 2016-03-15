@@ -11,13 +11,16 @@ class PlayerBot(AbstractBot):
         super(PlayerBot, self).__init__("Antón", "PlayerBot", "0")
         self.dx = 0
         self.dy = 0
+        self.shoot = 0
 
     def update(self, px, py):
         px = px + self.dx
         self.dx = 0
         py = py + self.dy
         self.dy = 0
-        return (px, py)
+        shoot = self.shoot
+        self.shoot = 0
+        return (px, py, shoot)
 
     def event(self, event):
         if event.key == K_UP:
@@ -28,3 +31,5 @@ class PlayerBot(AbstractBot):
             self.dx = self.dx - self.SPEED
         elif event.key == K_RIGHT:
             self.dx = self.dx + self.SPEED
+        elif event.key == K_SPACE:
+            self.shoot = 1
