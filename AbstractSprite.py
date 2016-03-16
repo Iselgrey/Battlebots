@@ -7,6 +7,10 @@ class AbstractSprite():
     __metaclass__ = ABCMeta
 
     @abstractmethod
+    def get_aabb(self):
+        pass
+
+    @abstractmethod
     def set_pos(self, x, y):
         return False
 
@@ -17,3 +21,11 @@ class AbstractSprite():
     @abstractmethod
     def draw(self, surface):
         return False
+
+    def collides(self, sprites):
+        aabb = self.get_aabb()
+        for s in sprites:
+            if aabb.colliderect(s.get_aabb()) and self != s:
+                return True
+        return False
+

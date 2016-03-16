@@ -46,8 +46,10 @@ class GameScreen(AbstractScreen):
         if self.player1_bot != None and self.player2_bot != None:
             self.player1_x, self.player1_y, foo = self.player1_bot.update(self.player1_x, self.player1_y)
             self.player2_x, self.player2_y, foo = self.player2_bot.update(self.player2_x, self.player2_y)
-            surface.blit(self.img_tank_180, (self.player1_x, self.player1_y))
-            surface.blit(self.img_tank, (self.player2_x, self.player2_y))
+            #surface.blit(self.img_tank_180, (self.player1_x, self.player1_y))
+            #surface.blit(self.img_tank, (self.player2_x, self.player2_y))
+            for s in self.sprites:
+                 s.draw(surface, self.sprites)
 
     def event(self, event):
         if event.type == QUIT:
