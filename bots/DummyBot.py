@@ -8,7 +8,7 @@ class DummyBot(AbstractBot):
         super(DummyBot, self).__init__("Antón", "DummyBot", "0")
 
     def update(self, px, py):
-        return (px, py, False)
+        return (px, py)
 
     def event(self, event):
         pass
