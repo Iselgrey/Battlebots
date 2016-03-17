@@ -4,6 +4,7 @@
 import pygame
 from pygame.locals import *
 from AbstractScreen import AbstractScreen
+from MisileSprite import MisileSprite
 
 class GameScreen(AbstractScreen):
     ACTION_QUIT = "game_quit"
@@ -20,6 +21,8 @@ class GameScreen(AbstractScreen):
         self.restart()
         self.player1_bot = None
         self.player2_bot = None
+        self.sprites = []
+        self.sprites.append(MisileSprite())
 
     def set_p1(self, bot):
         self.player1_bot = bot()
@@ -40,12 +43,13 @@ class GameScreen(AbstractScreen):
             self.player2_y = rect.height-100
             self.reset = False
         if self.player1_bot != None and self.player2_bot != None:
-            self.player1_x, self.player1_y, foo = self.player1_bot.update(self.player1_x, self.player1_y)
-            self.player2_x, self.player2_y, foo = self.player2_bot.update(self.player2_x, self.player2_y)
+            #self.player1_x, self.player1_y, foo = self.player1_bot.update(self.player1_x, self.player1_y)
+            #self.player2_x, self.player2_y, foo = self.player2_bot.update(self.player2_x, self.player2_y)
             #surface.blit(self.img_tank_180, (self.player1_x, self.player1_y))
             #surface.blit(self.img_tank, (self.player2_x, self.player2_y))
             for s in self.sprites:
-                 s.draw(surface, self.sprites)
+                 s.update(self.sprites)
+                 s.draw(surface)
 
     def event(self, event):
         if event.type == QUIT:
