@@ -8,6 +8,7 @@ from MisileSprite import MisileSprite
 
 class GameScreen(AbstractScreen):
     ACTION_QUIT = "game_quit"
+    ACTION_STOP = "game_stop"
     color_black = (0, 0, 0)
 
     def __init__(self, callback_fcn, resolution):
@@ -56,7 +57,7 @@ class GameScreen(AbstractScreen):
             self.action(self.ACTION_QUIT, None)
         elif event.type == KEYUP:
             if event.key == K_ESCAPE:
-                self.action(self.ACTION_QUIT, None)
+                self.action(self.ACTION_STOP, None)
         elif event.type == KEYDOWN and event.key != K_ESCAPE and self.player1_bot != None and self.player2_bot != None:
             self.player1_bot.event(event)
             self.player2_bot.event(event)

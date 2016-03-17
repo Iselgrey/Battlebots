@@ -38,8 +38,10 @@ class BattleBots:
             self.screen_game.set_p1(opt)
         elif code == MenuScreen.ACTION_SETP2:
             self.screen_game.set_p2(opt)
-        elif code == GameScreen.ACTION_QUIT:
+        elif code == GameScreen.ACTION_STOP:
             self.screen_current = self.screen_menu
+        elif code == GameScreen.ACTION_QUIT:
+            self.quit()
         else:
             print("[!] Unrecognized action...")
             self.quit()
