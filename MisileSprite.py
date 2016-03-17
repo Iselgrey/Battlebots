@@ -18,6 +18,9 @@ class MisileSprite(AbstractSprite):
         img = pygame.image.load('resources/images/misile1.png')
         img.set_colorkey((0,0,0))
         self.add_frame(self.state_normal, img)
+        img = pygame.image.load('resources/images/misile2.png')
+        img.set_colorkey((0,0,0))
+        self.add_frame(self.state_normal, img)
         self.set_pos(0, 0)
         self.set_angle(30)
 
